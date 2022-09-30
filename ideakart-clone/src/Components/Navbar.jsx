@@ -1,19 +1,24 @@
-import { Box, Button, Input, Text } from "@chakra-ui/react"
+import { Box, Button, Input, Select, Text } from "@chakra-ui/react"
+import { ChevronDownIcon } from '@chakra-ui/icons'
 import { useEffect, useState } from "react"
 import "./BooksList.css"
 import BooksList from "./BooksList";
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 
 function Navbar() {
 
     const [books, setBooks] = useState([]);
+    const { state } = useContext(AuthContext)
 
     useEffect(() => {
-        axios.get(`https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&maxResults=40`)
-            .then(res => {setBooks(res.data.items);
-            console.log(res.data.items[0].volumeInfo.imageLinks.thumbnail)
-    })
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=monk+inauthor:keyes&maxResults=40`)
+            .then(res => {
+                setBooks(res.data.items);
+                console.log(res.data.items[0].volumeInfo.imageLinks.thumbnail)
+            })
     }, [])
 
     return (
@@ -30,20 +35,31 @@ function Navbar() {
                 <Box display={"flex"} gap="40px" color={"white"}>
                     <Text>About</Text>
                     <Text>Contact</Text>
-                    <Text>Sign In</Text>
-                    <Text>Sign Up</Text>
+                    {
+                        state.isAuth ? <div>
+                            <Select placeholder="Eve" border={"none"}>
+                                <option >Option 3</option>
+                                <option >Option 3</option>
+                                <option >Option 3</option>
+                            </Select>
+                            </div>
+                            : <div style={{ display: "flex", gap: "23px" }}>
+                                <Text>Sign In</Text>
+                                <Text>Sign Up</Text>
+                            </div>
+                    }
                 </Box>
             </Box>
 
 
             <div className="bookContainer">
-            {
-                books?.map((el)=>(
-                    <BooksList title={el.volumeInfo.title}
-                     image={el.volumeInfo.imageLinks?.thumbnail}
-                     />
-                ))
-            }
+                {
+                    books?.map((el) => (
+                        <BooksList title={el.volumeInfo.title}
+                            image={el.volumeInfo.imageLinks?.thumbnail}
+                        />
+                    ))
+                }
             </div>
         </div>
     )
