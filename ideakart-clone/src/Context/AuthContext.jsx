@@ -12,13 +12,15 @@ function AuthContextProvider({ children }) {
 
     const toggleLogin = () => {
         setState({
-            isAuth: true
+            isAuth: true,
         })
     }
 
 
     const toggleLogOut = () => {
-
+        setState({
+            isAuth: false,
+        })
     }
     return (
         <div>
