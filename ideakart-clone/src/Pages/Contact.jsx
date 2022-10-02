@@ -1,4 +1,5 @@
 import { background, Box, Button, FormControl, FormLabel, Grid, GridItem, Input, Textarea } from "@chakra-ui/react"
+import Footer from "../Components/Footer"
 
 function Contact() {
     return (
@@ -10,25 +11,25 @@ function Contact() {
         }}>
             <Box w="2xl" m="auto" mt="100" p={5}>
                 <Grid templateColumns="repeat(2,1fr)" gap={2} justifyContent={"center"}>
-                    <GridItem colSpan={{base:2,md:1}}>
+                    <GridItem colSpan={{ base: 2, md: 1 }}>
                         <FormControl>
                             <FormLabel> First Name</FormLabel>
                             <Input placeholder="Enter Your First Name" bgColor={"white"}></Input>
                         </FormControl>
                     </GridItem>
-                    <GridItem colSpan={{base:2,md:1}}>
+                    <GridItem colSpan={{ base: 2, md: 1 }}>
                         <FormControl>
                             <FormLabel> Last Name</FormLabel>
                             <Input placeholder="Enter Your Last Name" bgColor={"white"}></Input>
                         </FormControl>
                     </GridItem>
-                    <GridItem colSpan={{base:2,md:1}}>
+                    <GridItem colSpan={{ base: 2, md: 1 }}>
                         <FormControl>
                             <FormLabel>Email</FormLabel>
                             <Input placeholder="Enter Your Email" bgColor={"white"}></Input>
                         </FormControl>
                     </GridItem>
-                    <GridItem colSpan={{base:2,md:1}}>
+                    <GridItem colSpan={{ base: 2, md: 1 }}>
                         <FormControl>
                             <FormLabel>Phone Number</FormLabel>
                             <Input placeholder="Enter Your Phone Number" bgColor={"white"}></Input>
@@ -49,6 +50,13 @@ function Contact() {
 
                 </Grid>
             </Box>
+            <br />
+            <br />
+            <hr />
+            <br />
+            <br />
+            <Footer />
+            
         </div>
     )
 }
