@@ -1,6 +1,7 @@
 import { Box, Button, Checkbox, Container, FormControl, FormLabel, Heading, Input, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import { AuthContext } from "../Context/AuthContext";
 
@@ -31,6 +32,10 @@ function SignIn() {
             })
     }
 
+    if(state.isAuth){
+        return <Navigate to="/" />
+    }
+
     return (
         <div>
             <Box mt={"100px"}>
@@ -42,7 +47,7 @@ function SignIn() {
                     </FormControl>
                     <FormControl>
                         <FormLabel >Password</FormLabel>
-                        <Input name="password" onChange={(e) => setLoginData({ ...loginData, [e.target.name]: e.target.value })}></Input>
+                        <Input type="password" name="password" onChange={(e) => setLoginData({ ...loginData, [e.target.name]: e.target.value })}></Input>
                     </FormControl>
                 </Container>
                 <Box mt={4}><Checkbox >Remember Me</Checkbox></Box>

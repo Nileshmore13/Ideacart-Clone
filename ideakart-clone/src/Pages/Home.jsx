@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Input, Select, Text } from "@chakra-ui/react"
+import { Box, Button, Heading, Input, Select, Text ,Grid} from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import "../Components/BooksList.css"
 import axios from "axios";
@@ -13,13 +13,15 @@ function Home(){
         axios.get(`https://www.googleapis.com/books/v1/volumes?q=monk+inauthor:keyes&maxResults=40`)
             .then(res => {
                 setBooks(res.data.items);
-                console.log(res.data.items[0].volumeInfo.imageLinks.thumbnail)
+                // console.log(res.data.items[0].volumeInfo.imageLinks.thumbnail)
             })
     }, [])
+
+   
     return(
         <div>
             <Heading>Top Reads</Heading>
-            <div className="bookContainer">
+            <Grid className="bookContainer" templateColumns={{base:"repeat(1,1fr)",sm:"repeat(1,1fr)", md:"repeat(2,1fr)",lg:"repeat(4,1fr)"}}>
                 {
                     books?.map((el) => (
                         <BooksList title={el.volumeInfo.title}
@@ -28,7 +30,7 @@ function Home(){
                         />
                     ))
                 }
-            </div>
+            </Grid>
            <br />
            <br />
            <hr />

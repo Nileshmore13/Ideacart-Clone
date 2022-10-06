@@ -1,9 +1,7 @@
-import { Box, Button, Heading, Input, Select, Text } from "@chakra-ui/react"
+import { Box, Button, Input, Select, Text } from "@chakra-ui/react"
 import {Link} from "react-router-dom"
-import { ChevronDownIcon } from '@chakra-ui/icons'
 import { useEffect, useState } from "react"
 import "./BooksList.css"
-import BooksList from "./BooksList";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
@@ -11,9 +9,18 @@ import { AuthContext } from "../Context/AuthContext";
 
 function Navbar() {
 
-    
+    const [bookName,setBookName] = useState("")    
     const { state,toggleLogOut } = useContext(AuthContext)
 
+
+    useEffect(()=>{
+       let id = setTimeout(()=>{
+            axios.get(`https://www.googleapis.com/books/v1/volumes?q=${bookName}+inauthor:keyes&maxResults=40`)
+            .then(res=>console.log(res.data.items))
+        },800)
+        
+        return (()=>clearTimeout(id))
+    },[bookName])
 
     return (
         <div>
@@ -22,7 +29,7 @@ function Navbar() {
                 <Box display={"flex"} gap="140px">
                     <Text fontSize='20px' color="yellow" fontFamily={"Roboto"}><Link to="/">IDEACART</Link></Text>
                     <Box display="flex" backgroundColor={"whitesmoke"} borderRadius={"5px"}>
-                        <Input placeholder="Search" width={"400px"}></Input>
+                        <Input placeholder="Search" width={"400px"} value ={bookName} onChange={(e)=>setBookName(e.target.value)}></Input>
                         <Button>Search</Button>
                     </Box>
                 </Box>
@@ -53,6 +60,6 @@ export default Navbar
 
 
 // API key - AIzaSyBtD57Tp9hjgBsQx4QkwgFjbRf8TQhr-mw
-// api - https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes
+// api - https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyBtD57Tp9hjgBsQx4QkwgFjbRf8TQhr-mw
 
 
