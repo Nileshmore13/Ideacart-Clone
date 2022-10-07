@@ -6,6 +6,8 @@ export const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
 
+    const [books, setBooks] = useState([]);
+    console.log('books: ', books);
     const [state, setState] = useState({
         isAuth: false,
     })
@@ -24,7 +26,7 @@ function AuthContextProvider({ children }) {
     }
     return (
         <div>
-            <AuthContext.Provider value={{state,toggleLogOut,toggleLogin}}>
+            <AuthContext.Provider value={{state,toggleLogOut,toggleLogin,books,setBooks}}>
                 {children}
             </AuthContext.Provider>
         </div>

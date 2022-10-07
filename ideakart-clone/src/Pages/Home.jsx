@@ -1,13 +1,15 @@
-import { Box, Button, Heading, Input, Select, Text ,Grid} from "@chakra-ui/react"
-import { useEffect, useState } from "react"
+import {  Heading,Grid} from "@chakra-ui/react"
+import { useContext, useEffect, useState } from "react"
 import "../Components/BooksList.css"
 import axios from "axios";
 import BooksList from "../Components/BooksList";
 import Footer from "../Components/Footer";
+import { AuthContext } from "../Context/AuthContext";
 
 function Home(){
 
-    const [books, setBooks] = useState([]);
+    // const [books, setBooks] = useState([]);
+    const { books, setBooks} = useContext(AuthContext)
 
       useEffect(() => {
         axios.get(`https://www.googleapis.com/books/v1/volumes?q=monk+inauthor:keyes&maxResults=40`)
